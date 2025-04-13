@@ -6,12 +6,15 @@ import { Button, Card, Form, Input, Modal, Select, Spin } from "antd";
 import { CirclePlus } from "lucide-react";
 import { useState } from "react";
 import { CategorySelect } from "./components/category-select/category-select";
+import { ShopFormValues } from "./interfaces";
+import { shopFormStore } from "./store/slice/shop-form-store";
+import { useShopStore } from "./store";
 
 export default function Dashboard() {
-  const user = useGlobalStore((state) => state.user);
+  const { user } = useGlobalStore();
+  const { name, address, country, category } = useShopStore();
   const [form] = Form.useForm();
   const [showForm, setShowForm] = useState(true);
-  const [isCustomCategory, setIsCustomCategory] = useState(false);
 
   const isOwner = user?.roles[0] === "OWNER";
 
@@ -43,7 +46,13 @@ export default function Dashboard() {
                 <CirclePlus className="text-factuCyan" />
               </Button>
             ) : (
-              <Form
+              <Form<ShopFormValues>
+                initialValues={{
+                  name,
+                  address,
+                  country,
+                  category,
+                }}
                 form={form}
                 layout="vertical"
                 onFinish={onFinish}
@@ -71,10 +80,6 @@ export default function Dashboard() {
                       required: true,
                       message: "La dirección de la tienda es requerida",
                     },
-                    {
-                      min: 10,
-                      message: "La dirección debe tener al menos 10 caracteres",
-                    },
                   ]}>
                   <Input placeholder="Ej: Avenida 123" />
                 </Form.Item>
@@ -89,18 +94,14 @@ export default function Dashboard() {
                   ]}>
                   <Select
                     placeholder="Seleccioná un país"
-                    className="text-start">
-                    {spanishSpeakingCountries.map((country) => (
-                      <Select.Option key={country} value={country}>
-                        {country}
-                      </Select.Option>
-                    ))}
-                  </Select>
+                    className="text-start"
+                    options={spanishSpeakingCountries.map((country) => ({
+                      label: country,
+                      value: country,
+                    }))}
+                  />
                 </Form.Item>
-                <Form.Item
-                  label="Categoría de la tienda"
-                  name="category"
-                 >
+                <Form.Item label="Categoría de la tienda" name="category">
                   <CategorySelect />
                 </Form.Item>
                 <Form.Item>
