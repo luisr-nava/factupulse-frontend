@@ -20,7 +20,10 @@ export async function GET(req: Request) {
   });
 
   const data = await response.json();
-  return Response.json(data);
+  return new Response(JSON.stringify(data), {
+    status: response.status,
+    headers: { "Content-Type": "application/json" },
+  });
 }
 
 export async function POST(req: Request) {
@@ -34,7 +37,7 @@ export async function POST(req: Request) {
     return new Response("No autorizado o sin ruta", { status: 400 });
   }
 
-  const body = await req.text(); // o req.json() si lo vas a parsear
+  const body = await req.text();
 
   const backendUrl = `http://localhost:3000/api${url}`;
 
@@ -48,6 +51,9 @@ export async function POST(req: Request) {
   });
 
   const data = await response.json();
-  return Response.json(data);
+  return new Response(JSON.stringify(data), {
+    status: response.status, // ⬅️ ahora sí refleja el status real
+    headers: { "Content-Type": "application/json" },
+  });
 }
 

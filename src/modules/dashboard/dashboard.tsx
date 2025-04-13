@@ -16,9 +16,12 @@ export default function Dashboard() {
   const isOwner = user?.roles[0] === "OWNER";
 
   const haveStore = Array.isArray(user?.shopId) && user.shopId.length > 0;
-  
+
   const handleClick = () => {
     setShowForm(true);
+  };
+  const onFinish = (values: any) => {
+    console.log("Success:", values);
   };
   return (
     <div>
@@ -43,9 +46,8 @@ export default function Dashboard() {
               <Form
                 form={form}
                 layout="vertical"
-                // onFinish={onFinish}
+                onFinish={onFinish}
                 className="max-w-md w-full mx-auto space-y-6 ">
-                <CategorySelect />
                 <Form.Item
                   label="Nombre de la tienda"
                   name="name"
@@ -98,54 +100,8 @@ export default function Dashboard() {
                 <Form.Item
                   label="Categoría de la tienda"
                   name="category"
-                  rules={[
-                    { required: true, message: "La categoría es obligatoria" },
-                  ]}>
-                  <Select
-                    placeholder="Seleccioná una categoría"
-                    className="text-start">
-                    {/* {storeCategories.map((category) => (
-                      <Select.Option
-                        key={category.value}
-                        value={category.value}>
-                        {category.label}
-                      </Select.Option>
-                    ))} */}
-                  </Select>
-                </Form.Item>
-                <Form.Item
-                  label="Categoría de la tienda"
-                  name="category"
-                  rules={[
-                    { required: true, message: "La categoría es obligatoria" },
-                  ]}>
-                  {!isCustomCategory ? (
-                    <div className="flex flex-col gap-2">
-                      <Select
-                        placeholder="Seleccioná una categoría"
-                        className="text-start">
-                        {/* {storeCategories.map((category) => (
-                          <Select.Option
-                            key={category.value}
-                            value={category.value}>
-                            {category.label}
-                          </Select.Option>
-                        ))} */}
-                      </Select>
-
-                      <Button
-                        type="dashed"
-                        onClick={() => setIsCustomCategory(true)}
-                        className="w-full">
-                        + Crear nueva categoría
-                      </Button>
-                    </div>
-                  ) : (
-                    <Input
-                      placeholder="Escribí el nombre de la nueva categoría"
-                      className="w-full"
-                    />
-                  )}
+                 >
+                  <CategorySelect />
                 </Form.Item>
                 <Form.Item>
                   <Button

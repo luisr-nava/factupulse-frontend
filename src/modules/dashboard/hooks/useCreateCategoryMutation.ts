@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { message } from "antd";
+import { toast } from "sonner";
 
 export const useCreateCategoryMutation = (
   onSuccess?: (newCategory: any) => void,
@@ -15,12 +15,11 @@ export const useCreateCategoryMutation = (
       return res.json();
     },
     onSuccess: (newCategory) => {
-      message.success("Categoría creada 🎉");
+      toast.success(`Haz creado la categoría ${newCategory.name} `);
       onSuccess?.(newCategory);
     },
     onError: () => {
-      message.error("Error al crear la categoría");
+      toast.error("Error al crear la categoría");
     },
   });
 };
-
