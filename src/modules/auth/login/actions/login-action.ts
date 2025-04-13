@@ -51,6 +51,7 @@ export async function loginUser(
   return {
     errors: [],
     success: "¡Bienvenido!",
+    user: json.user,
   };
 }
 

@@ -1,9 +1,9 @@
 import "antd/dist/reset.css";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter, Urbanist } from "next/font/google";
-import { ClientInit } from "@/components/shared/client-init";
+import { Urbanist } from "next/font/google";
 import { Toaster } from "sonner";
+import { Providers } from "@/components/shared/providers";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -25,38 +25,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body className={`${urbanist.variable} select-none`}>
-        <ClientInit>{children}</ClientInit>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${urbanist.variable} select-none`}
+        suppressHydrationWarning>
+        <Providers>{children}</Providers>
         <Toaster position="top-right" richColors />
       </body>
     </html>
   );
-}
-
-{
-  /* <script
-  dangerouslySetInnerHTML={{
-    __html: `(async function() {
-try {
-  const theme = localStorage.getItem("theme");
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const isDark = theme === "dark" || (!theme && prefersDark);
-  if (isDark) {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
-} catch (_) {}
-})();`,
-  }} */
-}
-
-{
-  /* /> */
 }
 

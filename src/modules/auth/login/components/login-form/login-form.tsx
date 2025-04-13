@@ -5,15 +5,18 @@ import { useRouter } from "next/navigation";
 import { startTransition, useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { loginUser } from "../../actions/login-action";
+import { useGlobalStore } from "@/src/core/data";
 
 export default function LoginForm() {
   const router = useRouter();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const setUser = useGlobalStore((state) => state.setUser);
 
   const [state, dispatch] = useActionState(loginUser, {
     errors: [],
     success: "",
+    user: null,
   });
 
   const onFinish = async (values: any) => {
@@ -35,6 +38,7 @@ export default function LoginForm() {
     }
     if (state.success) {
       toast.success("Inicio de sesión exitoso");
+      setUser(state.user);
       router.push("/dashboard");
     }
   }, [state, router]);

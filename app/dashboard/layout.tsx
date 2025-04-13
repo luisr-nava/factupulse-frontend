@@ -1,7 +1,6 @@
 import { Footer } from "@/src/components";
 import { Logo } from "@/src/components/logo";
-import { Link } from "lucide-react";
-
+import Link from "next/link";
 
 export default function DashboardLayout({
   children,
@@ -19,5 +18,5 @@ export default function DashboardLayout({
       <Footer />
     </div>
   );
-
 }
+

@@ -1,6 +1,11 @@
-import { Landing } from "@/src/modules/landing";
+import { Dashboard } from "@/src/modules/dashboard";
+import { Metadata } from "next";
 
-export default function Dashboard() {
-  return <div>dashboard</div>;
+export const metadata: Metadata = {
+  title: "Dashboard | FactuPulse ",
+  description: "FactuPulse | Dashboard Page",
+};
+export default function DashboardPage() {
+  return <Dashboard />;
 }
 

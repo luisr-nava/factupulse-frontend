@@ -1,7 +1,7 @@
 import { Footer } from "@/src/components";
 import { Logo } from "@/src/components/logo";
 import Link from "next/link";
-import React from "react";
+
 export default function AuthLayout({
   children,
 }: Readonly<{

@@ -1,5 +1,6 @@
 "use client";
-
+import { StyleProvider } from "@ant-design/cssinjs";
+import { ConfigProvider } from "antd";
 import { useThemeStore } from "@/src/core/store/theme-store";
 import { useEffect } from "react";
 interface Props {
@@ -16,3 +17,4 @@ const ClientInit = ({ children }: Props) => {
 };
 
 export default ClientInit;
+

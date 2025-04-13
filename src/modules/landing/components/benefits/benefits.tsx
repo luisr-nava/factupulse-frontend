@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Benefits() {
   return (
     <section className="space-y-10 mt-10 mb-14 text-center lg:mx-36">

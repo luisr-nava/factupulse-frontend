@@ -1,18 +1,49 @@
 "use client";
 
 import { Button, Form, Input } from "antd";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useActionState, useEffect, startTransition } from "react";
+import { resetPasswordAction } from "../../actions/reset-password-action";
+import { toast } from "sonner";
 
 export default function ResetPasswordForm() {
-      const [form] = Form.useForm();
+  const [form] = Form.useForm();
+
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const token = searchParams.get("token");
+
+
+  const token = searchParams.get("token")!;
+
+  const [state, dispatch, isPending] = useActionState(resetPasswordAction, {
+    errors: [],
+    success: "",
+  });
+
+  const onFinish = async (values: { password: string }) => {
+    console.log(values);
+    startTransition(() => {
+      dispatch({ token, newPassword: values.password });
+    });
+  };
+
+  useEffect(() => {
+    if (state.errors) {
+      state.errors.forEach((error) => {
+        toast.error(error);
+      });
+    }
+    if (state.success) {
+      toast.success(state.success);
+      router.push("/auth/login");
+    }
+  }, [state, router]);
 
   return (
     <Form
       form={form}
       layout="vertical"
-    //   onFinish={onFinish}
+        onFinish={onFinish}
       className="max-w-md w-full mx-auto space-y-6 bg-white dark:bg-primary-900 p-6 rounded-lg shadow">
       <Form.Item
         label="Nueva contraseña"
@@ -45,15 +76,13 @@ export default function ResetPasswordForm() {
         <Button
           type="primary"
           htmlType="submit"
-        //   loading={loading}
+          loading={isPending}
+          disabled={isPending}
           className="w-full bg-factuCyan text-white hover:!bg-factuCyan/80 transition-all duration-500">
           Restablecer contraseña
         </Button>
       </Form.Item>
     </Form>
   );
-
 }
-
-
 

@@ -1,7 +1,6 @@
 import { CustomButton } from "@/components/ui";
 import { useThemeStore } from "@/src/core/store/theme-store";
 import { Moon, Sun } from "lucide-react";
-import React from "react";
 
 export default function ChangeTheme() {
   const { theme, toggleTheme } = useThemeStore((state) => ({

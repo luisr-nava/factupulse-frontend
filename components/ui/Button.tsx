@@ -1,5 +1,4 @@
-import { Button, ButtonProps } from "antd";
-import React from "react";
+import { Button, ButtonProps } from "antd"
 
 type CustomButtonProps = ButtonProps & {
   children: React.ReactNode;

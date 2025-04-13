@@ -1,4 +1,3 @@
-import React from "react";
 import { ResetPasswordForm } from "./components";
 
 export default function ResetPassword() {

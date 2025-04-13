@@ -26,12 +26,12 @@ const Header = () => {
           <nav className="hidden md:flex gap-4 ml-4 items-center">
             <Link
               href="/auth/register"
-              className="hover:text-primary-600 font-medium">
+              className="hover:text-primary-600 font-medium hover:scale-105 duration-300">
               Registrarse
             </Link>
             <Link
               href="/auth/login"
-              className=" font-medium bg-factuCyan rounded-2xl text-white hover:bg-factuCyan/80 hover:text-white p-2">
+              className=" font-medium bg-factuCyan rounded-2xl text-white hover:bg-factuCyan/80 hover:text-white p-2 px-4 hover:scale-105 duration-300">
               Iniciar sesión
             </Link>
           </nav>
@@ -75,6 +75,8 @@ const Header = () => {
 };
 
 export default Header;
+
+
 
 
 

@@ -1,5 +1,4 @@
 import { Box, CircleUserRound, Computer, Rocket, Store, Table2 } from "lucide-react";
-import React from "react";
 
 export default function TargetAudience() {
   return (
