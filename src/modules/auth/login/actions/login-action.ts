@@ -45,7 +45,7 @@ export async function loginUser(
     httpOnly: true,
     secure: true,
     sameSite: "lax",
-    maxAge: 60 * 60 * 24,
+    maxAge: 60 * 60 * 4,
   });
 
   return {
