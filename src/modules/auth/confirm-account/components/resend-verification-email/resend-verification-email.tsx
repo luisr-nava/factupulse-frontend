@@ -1,57 +1,10 @@
 "use client";
 
 import { Button, Form, Input } from "antd";
-import React, {
-  startTransition,
-  useActionState,
-  useEffect,
-  useState,
-} from "react";
-import { resendCodeVerification } from "../../actions/resend-confirmation-action";
-import { useRouter, useSearchParams } from "next/navigation";
-import { toast } from "sonner";
+import { useResendEmail } from "../../hooks";
 
 export default function ResendVerificationEmail() {
-  const searchParams = useSearchParams();
-
-  const [emailFromQuery, setEmailFromQuery] = useState<string | null>(null);
-
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const email =
-      searchParams.get("email") || localStorage.getItem("pendingEmail");
-    setEmailFromQuery(email);
-  }, [searchParams]);
-
-  const resendCodeVerificationWithEmail = resendCodeVerification.bind(
-    null,
-    emailFromQuery!,
-  );
-
-  const [state, dispatch] = useActionState(resendCodeVerificationWithEmail, {
-    errors: [],
-    success: "",
-  });
-
-  const handleResend = () => {
-    setLoading(true);
-    startTransition(() => {
-      dispatch();
-    });
-  };
-
-  useEffect(() => {
-    if (state.errors.length) {
-      state.errors.forEach((error) => toast.error(error));
-      setLoading(false);
-    }
-
-    if (state.success) {
-      toast.success(state.success);
-      setLoading(false);
-    }
-  }, [state]);
+  const { emailFromQuery, loading, handleResend } = useResendEmail();
 
   return emailFromQuery ? (
     <>

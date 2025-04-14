@@ -1,49 +1,9 @@
 "use client";
 import { Button, Checkbox, Form, Input } from "antd";
-import React, { useActionState, useEffect, useState } from "react";
-import { registerUser } from "../../actions/register-action";
-import { toast } from "sonner";
-import { startTransition } from "react";
-import { useRouter } from "next/navigation";
+import { useRegisterForm } from "../../hooks";
 
 export default function RegisterForm() {
-  const router = useRouter();
-  const [form] = Form.useForm();
-  const [loading, setLoading] = useState(false);
-
-  const [state, dispatch] = useActionState(registerUser, {
-    errors: [],
-    success: "",
-  });
-
-  const onFinish = async (values: any) => {
-    setLoading(true);
-    try {
-      startTransition(() => {
-        dispatch(values);
-      });
-      setLoading(false);
-      localStorage.setItem("pendingEmail", values.email);
-      router.push("/auth/confirm-acount");
-      form.resetFields();
-    } catch (error) {
-      toast.error("Error al registrar el usuario");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (state.errors) {
-      state.errors.forEach((error) => {
-        toast.error(error);
-      });
-    }
-    if (state.success) {
-      toast.success("Usuario registrado correctamente");
-    }
-  }, [state]);
-
+  const { pending, form, onFinish } = useRegisterForm();
   return (
     <Form
       form={form}
@@ -114,16 +74,12 @@ export default function RegisterForm() {
         <Button
           type="primary"
           htmlType="submit"
-          loading={loading}
+          loading={pending}
           className="w-full bg-factuCyan text-white hover:!bg-factuCyan/80 transition-all duration-500">
-          Crear cuenta
+          {pending ? "Creando cuenta..." : "Crear cuenta"}
         </Button>
       </Form.Item>
     </Form>
   );
 }
-
-
-
-
 

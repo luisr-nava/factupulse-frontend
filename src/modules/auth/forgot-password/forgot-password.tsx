@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { ForgotPasswordForm } from "./components";
 import { Button } from "antd";
+import { useForgotPassword } from "./hooks";
 
 export default function ForgotPassword() {
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const { setShowSuccessMessage, showSuccessMessage } = useForgotPassword();
   return (
     <div className="text-center space-y-2 mb-6">
       {showSuccessMessage ? (
@@ -34,7 +35,7 @@ export default function ForgotPassword() {
             contraseña.
           </p>
           <div className="mt-6">
-            <ForgotPasswordForm setShowSuccessMessage={setShowSuccessMessage} />
+            <ForgotPasswordForm />
           </div>
         </>
       )}

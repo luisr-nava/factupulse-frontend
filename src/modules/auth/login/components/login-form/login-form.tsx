@@ -1,48 +1,8 @@
 "use client";
-
 import { Button, Form, Input } from "antd";
-import { useRouter } from "next/navigation";
-import { startTransition, useActionState, useEffect, useState } from "react";
-import { toast } from "sonner";
-import { loginUser } from "../../actions/login-action";
-import { useGlobalStore } from "@/src/core/data";
-
+import { useLoginForm } from "../../hooks/useLoginForm";
 export default function LoginForm() {
-  const router = useRouter();
-  const [form] = Form.useForm();
-  const [loading, setLoading] = useState(false);
-  const setUser = useGlobalStore((state) => state.setUser);
-
-  const [state, dispatch] = useActionState(loginUser, {
-    errors: [],
-    success: "",
-    user: null,
-  });
-
-  const onFinish = async (values: any) => {
-    setLoading(true);
-    try {
-      startTransition(() => {
-        dispatch(values);
-      });
-    } catch {
-      toast.error("Error al iniciar sesión");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (state.errors.length) {
-      state.errors.forEach((error) => toast.error(error));
-    }
-    if (state.success) {
-      toast.success("Inicio de sesión exitoso");
-      setUser(state.user);
-      router.push("/dashboard");
-    }
-  }, [state, router]);
-
+  const { state, dispatch, pending, onFinish, form } = useLoginForm();
   return (
     <Form
       form={form}
@@ -70,9 +30,9 @@ export default function LoginForm() {
         <Button
           type="primary"
           htmlType="submit"
-          loading={loading}
+          loading={pending}
           className="w-full bg-factuCyan text-white hover:!bg-factuCyan/80 transition-all duration-500">
-          Iniciar sesión
+          {pending ? "Iniciando sesión..." : "Iniciar sesión"}
         </Button>
       </Form.Item>
     </Form>

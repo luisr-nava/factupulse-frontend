@@ -1,54 +1,9 @@
 "use client";
 import { Button, Form, Input } from "antd";
-import { useRouter } from "next/navigation";
-import {
-  Dispatch,
-  SetStateAction,
-  startTransition,
-  useActionState,
-  useEffect,
-  useState,
-} from "react";
-import { forgotPassword } from "../../actions/forgot-password-action";
-import { toast } from "sonner";
+import { useForgotPassword } from "../../hooks";
 
-export default function ForgotPasswordForm({
-  setShowSuccessMessage,
-}: {
-  setShowSuccessMessage: Dispatch<SetStateAction<boolean>>;
-}) {
-  const [form] = Form.useForm();
-  const [loading, setLoading] = useState(false);
-
-  const router = useRouter();
-
-  const [state, dispatch, pending] = useActionState(forgotPassword, {
-    errors: [],
-    success: "",
-  });
-
-  const onFinish = async (values: { email: string }) => {
-    setLoading(true);
-    try {
-      startTransition(() => {
-        dispatch(values);
-      });
-    } catch (error) {
-      toast.error("Error al enviar el correo");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (state.errors.length) {
-      state.errors.forEach((error) => toast.error(error));
-    }
-    if (state.success) {
-      toast.success("Correo enviado");
-      setShowSuccessMessage(true);
-    }
-  }, [state]);
+export default function ForgotPasswordForm() {
+  const { form, onFinish, pending } = useForgotPassword();
   return (
     <Form
       form={form}
@@ -72,10 +27,12 @@ export default function ForgotPasswordForm({
           loading={pending}
           disabled={pending}
           className="w-full bg-factuCyan text-white hover:!bg-factuCyan/80 transition-all duration-500">
-          Enviar código
+          {!pending ? "Enviar código" : "Enviando código..."}
         </Button>
       </Form.Item>
     </Form>
   );
 }
+
+
 
