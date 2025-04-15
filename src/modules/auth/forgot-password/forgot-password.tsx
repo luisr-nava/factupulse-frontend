@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { AppButton } from "@/components/ui/button";
 import { ForgotPasswordForm } from "./components";
-import { Button } from "antd";
 import { useForgotPassword } from "./hooks";
 
 export default function ForgotPassword() {
@@ -18,12 +17,11 @@ export default function ForgotPassword() {
             Se ha enviado un correo electrónico con instrucciones para
             restablecer tu contraseña.
           </p>
-          <Button
-            type="primary"
+          <AppButton
             onClick={() => setShowSuccessMessage(false)}
             className="bg-factuCyan text-white hover:!bg-factuCyan/80 transition-all duration-500">
             Volver al inicio de sesión
-          </Button>
+          </AppButton>
         </>
       ) : (
         <>
@@ -35,7 +33,8 @@ export default function ForgotPassword() {
             contraseña.
           </p>
           <div className="mt-6">
-            <ForgotPasswordForm />
+            {" "}
+            <ForgotPasswordForm />{" "}
           </div>
         </>
       )}

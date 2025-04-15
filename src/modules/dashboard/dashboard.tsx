@@ -1,7 +1,7 @@
 "use client";
 
 import { spanishSpeakingCountries } from "@/src/constants";
-import { useGlobalStore } from "@/src/core/data";
+import { useGlobalStore } from "@/src/core/store";
 import { Button, Card, Form, Input, Modal, Select, Spin } from "antd";
 import { CirclePlus } from "lucide-react";
 import { useState } from "react";

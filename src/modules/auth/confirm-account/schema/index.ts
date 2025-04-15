@@ -8,3 +8,8 @@ export const EmailSchema = z
   .string({ message: "Correo no valido" })
   .email({ message: "Correo no valido" });
 
+export const resendSchema = z.object({
+  email: z.string().email({ message: "Ingresa un correo válido" }),
+});
+
+export type ResendFormValues = z.infer<typeof resendSchema>;

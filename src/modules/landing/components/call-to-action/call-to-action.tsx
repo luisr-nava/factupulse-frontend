@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink } from "@/components/ui/link";
 
 export default function CallToAction() {
   return (
@@ -13,15 +13,12 @@ export default function CallToAction() {
         cualquier lugar.
       </p>
       <div className="mt-10">
-        <Link
-          href={"/"}
-          className="w-full md:w-auto bg-factuCyan text-white px-5 py-2 rounded-md font-medium hover:bg-factuCyan/50 transition-all duration-400 hover:text-white/80
-        
-        lg:text-xl lg:px-8 lg:py-3 lg:rounded-lg 
-        
-        ">
+        <AppLink
+          variant="button"
+          href="/auth/register"
+          className="px-5 py-2 transition-all duration-400 lg:text-xl lg:px-8 lg:py-3 ">
           Crear mi cuenta
-        </Link>
+        </AppLink>
       </div>
     </section>
   );

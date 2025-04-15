@@ -12,13 +12,13 @@ import { useRouter } from "next/navigation";
 export const useAccountVerification = () => {
   const PIN_LENGTH = 6;
   const router = useRouter();
-  const [token, setToken] = useState<string[]>(Array(PIN_LENGTH).fill(""));
+  const [code, setCode] = useState<string[]>(Array(PIN_LENGTH).fill(""));
   const [isComplete, setIsComplete] = useState(false);
   const inputs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const confirmAccountWithToken = confirmAccount.bind(null, token.join(""));
+  const confirmAccountWithToken = confirmAccount.bind(null, code.join(""));
 
-  const [state, dispatch, isLoading] = useActionState(confirmAccountWithToken, {
+  const [state, dispatch, pending] = useActionState(confirmAccountWithToken, {
     errors: [],
     success: "",
   });
@@ -26,9 +26,9 @@ export const useAccountVerification = () => {
   const handleChange = (value: string, index: number) => {
     if (!/^\d?$/.test(value)) return;
 
-    const newToken = [...token];
+    const newToken = [...code];
     newToken[index] = value;
-    setToken(newToken);
+    setCode(newToken);
 
     const joined = newToken.join("");
     if (value && index < PIN_LENGTH - 1) {
@@ -42,10 +42,10 @@ export const useAccountVerification = () => {
     e: React.KeyboardEvent<HTMLInputElement>,
     index: number,
   ) => {
-    if (e.key === "Backspace" && !token[index] && index > 0) {
-      const prevToken = [...token];
+    if (e.key === "Backspace" && !code[index] && index > 0) {
+      const prevToken = [...code];
       prevToken[index - 1] = "";
-      setToken(prevToken);
+      setCode(prevToken);
       inputs.current[index - 1]?.focus();
     }
   };
@@ -77,18 +77,20 @@ export const useAccountVerification = () => {
     }
   }, [state, router]);
 
+
   return {
     dispatch,
     handleChange,
     handleKeyDown,
     inputs,
     isComplete,
-    isLoading,
+    pending,
     PIN_LENGTH,
     setIsComplete,
-    setToken,
+    setCode,
     state,
-    token,
+    code,
   };
 };
+
 

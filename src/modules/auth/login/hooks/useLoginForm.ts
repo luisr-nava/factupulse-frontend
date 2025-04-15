@@ -1,5 +1,4 @@
-import { useGlobalStore } from "@/src/core/data";
-import { Form } from "antd";
+import { useGlobalStore } from "@/src/core/store";
 import { startTransition, useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { loginUser } from "../actions/login-action";
@@ -7,7 +6,6 @@ import { useRouter } from "next/navigation";
 
 export const useLoginForm = () => {
   const router = useRouter();
-  const [form] = Form.useForm();
   const setUser = useGlobalStore((state) => state.setUser);
 
   const [state, dispatch, pending] = useActionState(loginUser, {
@@ -38,6 +36,6 @@ export const useLoginForm = () => {
     }
   }, [state, router]);
 
-  return { state, dispatch, pending, onFinish, form };
+  return { state, dispatch, pending, onFinish };
 };
 

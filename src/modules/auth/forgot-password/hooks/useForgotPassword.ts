@@ -1,12 +1,10 @@
 import { startTransition, useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { forgotPassword } from "../actions/forgot-password-action";
-import { Form } from "antd";
 
 export const useForgotPassword = () => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
-  const [form] = Form.useForm();
 
   const [state, dispatch, pending] = useActionState(forgotPassword, {
     errors: [],
@@ -37,15 +35,10 @@ export const useForgotPassword = () => {
   return {
     showSuccessMessage,
     setShowSuccessMessage,
-    form,
     onFinish,
     state,
     dispatch,
     pending,
   };
 };
-
-
-
-
 

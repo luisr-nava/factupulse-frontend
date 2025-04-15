@@ -1,12 +1,13 @@
+import { Footer } from "@/src/components";
 import {
-  Header,
-  Hero,
   About,
-  TargetAudience,
   Benefits,
   CallToAction,
+  Header,
+  Hero,
+  TargetAudience,
 } from "./components";
-import { Footer } from "@/src/components";
+// import { Footer } from "@/src/components";
 
 export default function Landing() {
   return (
@@ -15,13 +16,9 @@ export default function Landing() {
 
       <main className="mt-14 grid mx-3">
         <Hero />
-
         <About />
-
         <TargetAudience />
-
         <Benefits />
-
         <CallToAction />
       </main>
 

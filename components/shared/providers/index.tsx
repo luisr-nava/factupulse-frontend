@@ -16,8 +16,3 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// <StyleProvider hashPriority="high">
-// {/* <ConfigProvider> */}
-// {/* </ConfigProvider> */}
-// </StyleProvider>
-

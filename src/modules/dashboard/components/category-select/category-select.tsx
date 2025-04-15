@@ -1,5 +1,5 @@
 "use client";
-import { useGlobalStore } from "@/src/core/data";
+import { useGlobalStore } from "@/src/core/store";
 import { Button, Input, message, Select, Tooltip } from "antd";
 import { useCategorySocket } from "../../hooks/useCategorySocket";
 import {
@@ -86,5 +86,4 @@ export const CategorySelect = ({
     </div>
   );
 };
-
 

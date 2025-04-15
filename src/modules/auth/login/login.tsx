@@ -1,4 +1,7 @@
-import Link from "next/link";
+// import { LoginForm } from "./components";
+"use client";
+
+import { AppLink } from "@/components/ui/link";
 import { LoginForm } from "./components";
 
 export default function Login() {
@@ -14,19 +17,15 @@ export default function Login() {
       <div className="grid justify-center lg:text-xl">
         <p>
           ¿No tenés una cuenta?{" "}
-          <Link
-            href="/auth/register"
-            className="text-factuCyan font-semibold hover:text-factuCyan/80 duration-300">
+          <AppLink href="/auth/register" className="text-primary">
             Registrate
-          </Link>
+          </AppLink>
         </p>
         <p>
           ¿Olvidaste tu contraseña?{" "}
-          <Link
-            href="/auth/forgot-password"
-            className="text-factuCyan font-semibold hover:text-factuCyan/80 duration-300">
+          <AppLink href="/auth/forgot-password" className="text-primary">
             Recuperar contraseña
-          </Link>
+          </AppLink>
         </p>
       </div>
     </div>

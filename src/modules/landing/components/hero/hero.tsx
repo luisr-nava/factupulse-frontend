@@ -1,4 +1,5 @@
-import { CustomButton } from "@/components/ui";
+
+import { AppLink } from "@/components/ui/link";
 import {
   BadgeCheck,
   ChartNoAxesCombined,
@@ -42,15 +43,12 @@ export default function Hero() {
         </li>
       </ul>
       <div className="flex justify-center gap-4 mb-10 lg:mb-14">
-        <Link
-          href={"/"}
-          className="w-full md:w-auto bg-factuCyan text-white px-5 py-2 rounded-md font-medium hover:bg-factuCyan/50 transition-all duration-400 hover:text-white/80
-          
-          lg:text-xl lg:px-8 lg:py-3 lg:rounded-lg 
-          
-          ">
+        <AppLink
+          variant="button"
+          href="/auth/register"
+          className="px-5 py-2 transition-all duration-400 lg:text-xl lg:px-8 lg:py-3 ">
           Probar ahora
-        </Link>
+        </AppLink>
       </div>
     </section>
   );

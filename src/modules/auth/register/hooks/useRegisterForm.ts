@@ -1,4 +1,3 @@
-import { Form } from "antd";
 import { useRouter } from "next/navigation";
 import { startTransition, useActionState, useEffect, useState } from "react";
 import { registerUser } from "../actions/register-action";
@@ -6,7 +5,6 @@ import { toast } from "sonner";
 
 export const useRegisterForm = () => {
   const router = useRouter();
-  const [form] = Form.useForm();
 
   const [state, dispatch, pending] = useActionState(registerUser, {
     errors: [],
@@ -14,18 +12,18 @@ export const useRegisterForm = () => {
   });
 
   const onFinish = async (values: any) => {
+    console.log(values);
+
+    startTransition(() => {
+      dispatch(values);
+    });
     try {
-      startTransition(() => {
-        dispatch(values);
-      });
       localStorage.setItem("pendingEmail", values.email);
-      router.push("/auth/confirm-acount");
-      form.resetFields();
     } catch (error) {
       toast.error("Error al registrar el usuario");
     }
   };
-
+  
   useEffect(() => {
     if (state.errors) {
       state.errors.forEach((error) => {
@@ -34,8 +32,10 @@ export const useRegisterForm = () => {
     }
     if (state.success) {
       toast.success("Usuario registrado correctamente");
+      router.push("/auth/confirm-acount");
     }
   }, [state]);
-  return { state, dispatch, pending, form, onFinish };
+
+  return { state, dispatch, pending, onFinish };
 };
 

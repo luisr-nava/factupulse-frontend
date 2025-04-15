@@ -1,4 +1,3 @@
-import "antd/dist/reset.css";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
@@ -18,8 +17,6 @@ export const metadata: Metadata = {
     "FactuPulse es una plataforma para emprendedores y comerciantes que buscan profesionalizar su negocio sin complicarse.",
   icons: {
     icon: [{ url: "/factu-pulse.ico", type: "image/ico+xml" }],
-    shortcut: "/factu-pulse.ico",
-    apple: "/factu-pulse.ico",
   },
 };
 
