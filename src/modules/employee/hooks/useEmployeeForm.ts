@@ -3,13 +3,13 @@ import { Employee } from "@/interfaces/employee.interfaces";
 import { useCreateEmployeeMutation } from "./mutations/useCreateEmployeeMutation";
 import { useUpdateEmployeeMutation } from "./mutations/useUpdateEmployeeMutation";
 import { useState } from "react";
-import { useEmployeeFormStore } from "./useEmployeeStore";
+import { useEmployeeStore } from "./useEmployeeStore";
 import { EmployeePayload } from "../interfaces";
 
 export const useEmployeeForm = (employee?: Employee) => {
   const currentShop = useGlobalStore((s) => s.currentShop);
-  const isOpen = useEmployeeFormStore((s) => s.isOpen);
-  const closeForm = useEmployeeFormStore((s) => s.closeForm);
+  const isOpen = useEmployeeStore((s) => s.isOpen);
+  const closeForm = useEmployeeStore((s) => s.closeForm);
   const createMutation = useCreateEmployeeMutation();
   const updateMutation = useUpdateEmployeeMutation();
   const isPending = createMutation.isPending || updateMutation.isPending;

@@ -2,10 +2,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Employee } from "@/interfaces/employee.interfaces";
 import { EmployeePayload } from "../../interfaces";
 import { message } from "antd";
-import { useEmployeeFormStore } from "../useEmployeeStore";
+import { useEmployeeStore } from "../useEmployeeStore";
 
 export const useUpdateEmployeeMutation = () => {
-  const closeForm = useEmployeeFormStore((s) => s.closeForm);
+  const closeForm = useEmployeeStore((s) => s.closeForm);
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ data, id }: { data: EmployeePayload; id: string }) => {
@@ -30,7 +30,7 @@ export const useUpdateEmployeeMutation = () => {
       );
       closeForm();
     },
-    onError: (error: any) => {
+    onError: (error) => {
       message.error(error.message || "Error al actualizar el empleado");
     },
   });

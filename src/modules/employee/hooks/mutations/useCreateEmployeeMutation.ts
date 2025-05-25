@@ -1,12 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
 import { EmployeePayload } from "../../interfaces";
-import { measureMemory } from "vm";
 import { message } from "antd";
-import { useEmployeeFormStore } from "../useEmployeeStore";
+import { useEmployeeStore } from "../useEmployeeStore";
 
 export const useCreateEmployeeMutation = () => {
-  const closeForm = useEmployeeFormStore((s) => s.closeForm);
+  const closeForm = useEmployeeStore((s) => s.closeForm);
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: EmployeePayload) => {
@@ -26,7 +24,8 @@ export const useCreateEmployeeMutation = () => {
       queryClient.invalidateQueries({ queryKey: ["employees"] });
       closeForm();
     },
-    onError: (error: any) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onError: (error) => {
       message.error(error.message || "Error al crear empleado");
     },
   });
