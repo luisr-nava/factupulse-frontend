@@ -1,25 +1,22 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Employee } from "@/interfaces/employee.interfaces";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import {
   Input,
   InputRef,
   Select,
   Table,
-  TableColumnsType,
-  TableProps,
+  TableColumnsType
 } from "antd";
 import { useEmployeesTable } from "../../hooks/useEmployeesTable";
 import {
-  Search,
-  PlusCircle,
-  Facebook,
-  User,
+  Search, User,
   Pencil,
-  Trash2,
+  Trash2
 } from "lucide-react";
 import { AppButton } from "@/components";
-import { useDeleteEmployeeMutation } from "../../hooks/mutations/useDeleteEmployeeMutation";
 import DeleteEmployeeModal from "../delete-modal/delete-modal";
+import Image from "next/image";
 
 export default function EmployeesTable({
   onEdit,
@@ -38,7 +35,6 @@ export default function EmployeesTable({
     searchText,
     selectedRole,
     handleRoleChange,
-    deleteEmployee,
     employeeToDelete,
     setEmployeeToDelete,
     handleDeleteEmployee,
@@ -106,7 +102,7 @@ export default function EmployeesTable({
       <div className="bg-primary/10 rounded-xl p-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-muted-foreground shadow-sm border">
         <div className="flex items-center gap-4 col-span-1 md:col-span-2">
           {record.profileImageUrl ? (
-            <img
+            <Image
               src={record.profileImageUrl}
               alt={record.name}
               className="w-12 h-12 rounded-full object-cover border"

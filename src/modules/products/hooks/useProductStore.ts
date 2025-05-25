@@ -12,3 +12,12 @@ interface ProductStore {
   setProduct: (product: Product) => void;
 
 }
+
+export const useProductStore = create<ProductStore>((set) => ({
+  isOpen: false,
+  mode: "create",
+  product: null,
+  openForm: (mode, product) => set({ isOpen: true, mode, product }),
+  closeForm: () => set({ isOpen: false, mode: "create", product: null }),
+  setProduct: (product) => set({ product }),
+}));

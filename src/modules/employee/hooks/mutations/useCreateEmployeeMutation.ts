@@ -24,7 +24,6 @@ export const useCreateEmployeeMutation = () => {
       queryClient.invalidateQueries({ queryKey: ["employees"] });
       closeForm();
     },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error) => {
       message.error(error.message || "Error al crear empleado");
     },
