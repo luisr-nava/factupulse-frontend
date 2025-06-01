@@ -9,6 +9,10 @@ export const useDeleteProductMutation = () => {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });
+      const json = await res.json();
+      if (!res.ok)
+        throw new Error(json.message || "Error al eliminar producto");
+      return json;
     },
     onSuccess: () => {
       message.success("Producto eliminado correctamente");
