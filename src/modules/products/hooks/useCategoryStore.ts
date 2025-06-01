@@ -4,16 +4,15 @@ type FormMode = "create" | "edit";
 
 interface Category {
   id: string;
-  name: string;
-  description?: string;
+  name: string
 }
 
 interface CategoryStore {
   isOpen: boolean;
   mode: FormMode;
   category: Category | null;
-  openForm: (mode: FormMode, category?: Category) => void;
-  closeForm: () => void;
+  openFormCategory: (mode: FormMode, category?: Category) => void;
+  closeFormCategory: () => void;
   setCategory: (category: Category) => void;
 }
 
@@ -21,7 +20,7 @@ export const useCategoryStore = create<CategoryStore>((set) => ({
   isOpen: false,
   mode: "create",
   category: null,
-  openForm: (mode, category) => set({ isOpen: true, mode, category }),
-  closeForm: () => set({ isOpen: false, mode: "create", category: null }),
+  openFormCategory: (mode, category) => set({ isOpen: true, mode, category }),
+  closeFormCategory: () => set({ isOpen: false, mode: "create", category: null }),
   setCategory: (category) => set({ category }),
 }));

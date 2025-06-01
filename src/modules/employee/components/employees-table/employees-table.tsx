@@ -1,22 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Employee } from "@/interfaces/employee.interfaces";
 import { useEffect, useRef } from "react";
-import {
-  Input,
-  InputRef,
-  Select,
-  Table,
-  TableColumnsType
-} from "antd";
+import { Input, InputRef, Select, Table, TableColumnsType } from "antd";
 import { useEmployeesTable } from "../../hooks/useEmployeesTable";
-import {
-  Search, User,
-  Pencil,
-  Trash2
-} from "lucide-react";
+import { Search, User, Pencil, Trash2 } from "lucide-react";
 import { AppButton } from "@/components";
 import DeleteEmployeeModal from "../delete-modal/delete-modal";
 import Image from "next/image";
+import ActionsTable from "@/components/actions-table/actions-table";
 
 export default function EmployeesTable({
   onEdit,
@@ -24,7 +15,7 @@ export default function EmployeesTable({
   onEdit?: (employee: Employee) => void;
 }) {
   const {
-    data, // <- ahora sí usamos los empleados reales
+    data,
     isLoading,
     filters,
     setFilter,
@@ -78,18 +69,10 @@ export default function EmployeesTable({
       title: "",
       key: "actions",
       render: (_: any, record: Employee) => (
-        <div className="flex items-center gap-2">
-          <AppButton
-            onClick={() => onEdit?.(record)}
-            className="text-primary hover:text-primary-600 transition-colors">
-            <Pencil className="w-4 h-4" />
-          </AppButton>
-          <AppButton
-            onClick={() => setEmployeeToDelete(record)}
-            className="text-destructive hover:text-destructive-foreground transition-colors bg-red-700 hover:!bg-red-800 duration-300">
-            <Trash2 className="w-4 h-4" />
-          </AppButton>
-        </div>
+        <ActionsTable
+          edit={() => onEdit?.(record)}
+          remove={() => setEmployeeToDelete(record)}
+        />
       ),
       width: 80,
     },
@@ -216,7 +199,3 @@ export default function EmployeesTable({
     </div>
   );
 }
-
-
-
-

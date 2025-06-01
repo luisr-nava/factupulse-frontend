@@ -1,14 +1,12 @@
-import { AuthGuard } from "@/components/auth-guard/auth-guard";
+import { AuthGuard } from "@/components";
 import MainLayout from "@/layouts/MainLayout";
-import { Sales } from "@/modules/sales";
 
 export default function SalesPage() {
   return (
     <AuthGuard protected>
       <MainLayout>
-        <Sales />
+        <h1>aiksd</h1>
       </MainLayout>
     </AuthGuard>
   );
 }
-

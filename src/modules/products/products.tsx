@@ -1,10 +1,14 @@
 import { AppButton } from "@/components";
 import { PlusOutlined } from "@ant-design/icons";
-import { Segmented } from "antd";
+import { Segmented, Table } from "antd";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useProduct } from "./hooks/useProduct";
+import { Product } from "@/interfaces/product.interfaces";
+import { ProductTable } from "./components";
 
 export default function Products() {
+  const { isOpen } = useProduct();
   const router = useRouter();
   const { category } = router.query;
 
@@ -39,7 +43,9 @@ export default function Products() {
       {view === "Listado de productos" ? (
         <div>
           <AppButton icon={<PlusOutlined />}>Crear Producto</AppButton>
-          <p>🛒 Mostrando listado de productos</p>
+          {/* TAble */}
+          {!isOpen && <ProductTable />}
+          {/* Form */}
         </div>
       ) : (
         <div>
@@ -52,4 +58,3 @@ export default function Products() {
     </div>
   );
 }
-

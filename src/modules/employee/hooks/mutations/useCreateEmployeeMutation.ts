@@ -13,8 +13,7 @@ export const useCreateEmployeeMutation = () => {
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
       });
-      console.log(res);
-
+      
       const json = await res.json();
       if (!res.ok) throw new Error(json.message || "Error al crear empleado");
       return json;
